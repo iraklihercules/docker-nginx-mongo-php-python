@@ -52,3 +52,17 @@ services:
         depends_on:
             mongo:
                 condition: service_healthy
+    python:
+        build: ./python/
+        container_name: hercules_python
+        environment:
+            MONGO_DATABASE: hercules_database
+            MONGO_USERNAME: test
+            MONGO_PASSWORD: test
+        volumes:
+            - ./python/src:/app
+        links:
+            - mongo
+        depends_on:
+            mongo:
+                condition: service_healthy

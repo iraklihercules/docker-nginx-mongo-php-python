@@ -1,6 +1,6 @@
-# Docker Template with Nginx, PHP and MongoDB #
+# Docker Template with Nginx, PHP, Python and MongoDB #
 
-This is a basic Docker template with `Nginx` `PHP-FPM` `MongoDB` and `Mongo Express` services.
+This is a basic Docker template with `Nginx` `PHP-FPM` `Python` `MongoDB` and `Mongo Express` services.
 
 * [http://localhost:8080](http://localhost:8080) - Website
 * [http://localhost:8081](http://localhost:8081) - Mongo Express
@@ -44,6 +44,9 @@ make down  # Stop and remove containers
 make restart  # Restart containers
 
 make php-shell  # Open the PHP container's shell
+
+make python-shell  # Open the Python container's shell
+make run-python-script  # Run the Python script
 
 make mongo-shell  # Open the MongoDB container's shell
 make db-clear  # Delete data in the database (requires containers restart)
