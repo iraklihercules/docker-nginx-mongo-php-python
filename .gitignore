@@ -31,3 +31,4 @@ Thumbs.db
 
 # Database files
 !/**/.gitkeep
+mongo/live_data/

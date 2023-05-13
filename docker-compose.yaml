@@ -12,10 +12,15 @@ services:
         links:
             - phpfpm
     phpfpm:
-        image: php:8.2-fpm
+        build: ./app/
         container_name: hercules_phpfpm
         volumes:
             - ./app/src:/var/www/html
+        links:
+            - mongo
+        depends_on:
+            mongo:
+                condition: service_healthy
     mongo:
         image: mongo:4.4.6  # Last MongoDB version not requiring the CPU with AVX support.
         container_name: hercules_mongo
