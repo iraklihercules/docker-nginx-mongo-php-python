@@ -32,6 +32,8 @@ services:
             - 27017:27017
         volumes:
             - ./mongo/live_data:/data/db
+            - ./mongo/entrypoint:/docker-entrypoint-initdb.d
+            - ./mongo/dump:/dump
         healthcheck:
             test: echo 'db.runCommand("ping").ok' | mongo mongo:27017 --quiet
             interval: 30s

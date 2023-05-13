@@ -50,6 +50,9 @@ make run-python-script  # Run the Python script
 
 make mongo-shell  # Open the MongoDB container's shell
 make db-clear  # Delete data in the database (requires containers restart)
+make db-dump  # Generate a database dump
+make db-restore  # Restore the database from the dump
+make db-export  # Export the "Fixture" collection in json format
 ```
 
 ### 5. Using MongoDB Clients ###
@@ -63,3 +66,5 @@ User name: test
 Password: test
 Authentication DB: admin
 ```
+
+Happy coding!
