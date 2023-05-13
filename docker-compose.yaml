@@ -16,3 +16,34 @@ services:
         container_name: hercules_phpfpm
         volumes:
             - ./app/src:/var/www/html
+    mongo:
+        image: mongo:4.4.6  # Last MongoDB version not requiring the CPU with AVX support.
+        container_name: hercules_mongo
+        environment:
+            MONGO_INITDB_DATABASE: hercules_database
+            MONGO_INITDB_ROOT_USERNAME: test
+            MONGO_INITDB_ROOT_PASSWORD: test
+        ports:
+            - 27017:27017
+        volumes:
+            - ./mongo/live_data:/data/db
+        healthcheck:
+            test: echo 'db.runCommand("ping").ok' | mongo mongo:27017 --quiet
+            interval: 30s
+            timeout: 10s
+            retries: 5
+            start_period: 20s
+    mongoexpress:
+        image: mongo-express:1.0.0-alpha.4
+        container_name: hercules_mongoexpress
+        ports:
+            - 8081:8081
+        environment:
+            ME_CONFIG_MONGODB_SERVER: mongo
+            ME_CONFIG_MONGODB_ADMINUSERNAME: test
+            ME_CONFIG_MONGODB_ADMINPASSWORD: test
+        links:
+            - mongo
+        depends_on:
+            mongo:
+                condition: service_healthy
